@@ -1,0 +1,20 @@
+{
+  "variables": {
+    "access_key": "{{env `ALICLOUD_ACCESS_KEY`}}",
+    "secret_key": "{{env `ALICLOUD_SECRET_KEY`}}",
+    "region":     "{{env `REGION`}}",
+    "image_name": "{{env `IMAGE_NAME`}}"
+  },
+  "builders": [{
+    "type":"alicloud-ecs",
+    "access_key":"{{user `access_key`}}",
+    "secret_key":"{{user `secret_key`}}",
+    "region":"{{user `region`}}",
+    "image_name":"{{user `image_name`}}",
+    "source_image":"centos_7_02_64_20G_alibase_20170818.vhd",
+    "ssh_username":"root",
+    "instance_type":"ecs.n1.tiny",
+    "internet_charge_type":"PayByTraffic",
+    "io_optimized":"true"
+  }]
+}
