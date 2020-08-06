@@ -1,0 +1,41 @@
+{
+  "variables": {
+    "region": "{{env `REGION`}}",
+    "image_name": "{{env `IMAGE_NAME`}}",
+    "source_image": "centos_7_7_x64_20G_alibase_20200426.vhd",
+    "instance_type": "{{env `INSTANCE_TYPE`}}",
+    "vpc_id": "vpc-xxxxxxxxx",
+    "vswitch_id": "vsw-xxxxxxxx",
+    "access_key": "{{env `ALICLOUD_ACCESS_KEY`}}",
+    "secret_key": "{{env `ALICLOUD_SECRET_KEY`}}"
+  },
+  "builders": [
+    {
+      "type": "alicloud-ecs",
+      "access_key": "{{user `access_key`}}",
+      "secret_key": "{{user `secret_key`}}",
+      "region": "{{user `region`}}",
+      "image_name": "{{user `image_name`}}",
+      "source_image": "{{user `source_image`}}",
+      "ssh_username": "root",
+      "instance_type": "{{user `instance_type`}}",
+      "vpc_id": "{{user `vpc_id`}}",
+      "vswitch_id": "{{user `vswitch_id`}}",
+      "skip_image_validation": "true",
+      "io_optimized": "true"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/updateKernel.sh",
+        "scripts/reboot.sh",
+        "scripts/cleanUpKerneles.sh",
+        "config/default.sh",
+        "scripts/verify.sh"
+      ],
+      "expect_disconnect": true
+    }
+  ]
+}
