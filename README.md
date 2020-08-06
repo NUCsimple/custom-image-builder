@@ -13,7 +13,7 @@ Now we support two ways to build system image:
 ## Usage:
 1.Use build.sh 
 ```shell script
-$ bash build.sh -f example/ack-centos.json 
+$ bash build.sh example/ack-centos.json 
 ```
 required:
 - IMAGE_NAME(custom)
